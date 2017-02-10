@@ -1,0 +1,9 @@
+{% extends 'lan_posts_user.html' %}
+
+{% block post crud  %}
+<a href="{% url 'view_edit_post' slug=p.slug %}"> Edit </a>
+<br>
+<a href="{% url 'view_delete_post' slug=p.slug %}"> delete </a>
+<br>
+{%  endblock %}
+

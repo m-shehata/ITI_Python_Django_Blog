@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+	<h2> {{ post.post_title }} </h2><br>
+	<p> {{ post.post_body }}</p>
+	<br>
+	<img src="{{MEDIA_URL}}{{ post.image }}"/> {{ p.image }}
+	<br>
+	<h4>{{ post.category }}</h4>
+	<ul>
+		{% for comment in comments %}
+			<li> {{ comment.comment_descr}}</li>
+			<li> {{ comment.comment_date}}</li>
+			<li> {{ comment.comment_usrname}}</li>
+			{% if comment.comment_reply %}
+				<li> {{ comment.comment_reply}}</li>
+			{% else %}
+				<form method="post">{% csrf_token %}
+					{{ reply_form.as_p }}
+					<button text="submit">add reply</button>
+				</form>
+			{% endif %}
+
+		{% endfor %}
+		<form method="post">{% csrf_token %}
+			{{ comment_form.as_p }}
+			<button text="submit">add comment</button>
+		</form>
+	</ul>
+
+
+
+{% endblock %}

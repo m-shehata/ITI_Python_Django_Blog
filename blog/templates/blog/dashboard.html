@@ -1,0 +1,100 @@
+{% extends "blog/admin_dash.html" %}
+{% block bodyblock %}
+		<!-- /.row -->
+            <div class="row">
+            <!-- dash user -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ num_user }}</div>
+                                    <div>Users!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Users</span>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <!-- dash posts -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ num_post }}</div>
+                                    <div>Posts!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'view_admin_posts'  %}">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Posts</span>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <!-- dash category -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ num_cat }}</div>
+                                    <div>Categoris!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'view_all_categories'  %}">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Cateegories</span>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <!-- dash forbidden -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ num_words }}</div>
+                                    <div>Forbidden Words!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Words</span>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

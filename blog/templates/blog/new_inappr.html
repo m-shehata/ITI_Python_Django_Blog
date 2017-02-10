@@ -1,0 +1,9 @@
+{% extends "blog/admin_dash.html" %}
+{% block bodyblock %}
+
+{% load bootstrap %}
+<form method='POST'>{% csrf_token %}
+{{ inappr_form|bootstrap }}
+<button type="submit">Save</button>
+</form>
+{% endblock %}

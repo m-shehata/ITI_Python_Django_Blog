@@ -1,0 +1,22 @@
+
+
+{% block main_block %}
+
+
+<table border ='1' width="100" >
+<th> Category Name </th> <th colspan="3">Operatins</th>
+
+{%  for cat in all_categories %}
+<tr>
+	<td>{{cat.cat_name}}</td>
+	<td><a href="new/{{cat.id}}">New Category</a></td>
+	<td><a href="{{cat.id}}/edit">Update Category</a></td>
+	<td><a href="{{cat.id}}/delete">Delete Category</a></td>
+</tr>	
+{%  endfor  %}
+</table>
+
+
+
+
+{%  endblock %}

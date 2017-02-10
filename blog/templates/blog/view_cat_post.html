@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "blog/view_posts.html" %}
+
+{% load staticfiles %}
+<html>
+<head>
+	<title>Categories</title>
+</head>
+<body>
+	{% block content %}
+	<ul> {{ category.cat_name }}
+	{% for p in post %}
+		<li><a href="{{ p.get_absolute_url }}"> {{ p.post_title }} </a> </li>
+		{% endfor %}
+	</ul>
+	{% endblock %}
+</body>
+</html>

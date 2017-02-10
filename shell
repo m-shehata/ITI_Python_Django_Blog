@@ -1,0 +1,6 @@
+from blog.models import Categories
+cat=Categories.objects.get(pk=1)
+from django.contrib.auth import models
+from django.contrib.auth.models import User
+us=User.objects.get(pk=1)
+Subscribe.objects.create(category=cat,curr_user=us)

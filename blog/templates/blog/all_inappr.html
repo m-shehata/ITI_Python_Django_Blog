@@ -1,0 +1,11 @@
+{% extends "blog/admin_dash.html" %}
+{% block bodyblock %}
+<nav class="navbar navbar-default">
+ <h1 class="text-center">In-Appropriate Words </h1>
+</nav>
+<ul class="list-group">
+{% for inappr in all_inappr %}
+  <li class="list-group-item">{{inappr.inappr_wrd}}</li>
+{% endfor %}
+</ul>
+{% endblock %}

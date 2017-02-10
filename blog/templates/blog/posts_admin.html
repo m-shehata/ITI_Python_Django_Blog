@@ -1,0 +1,46 @@
+ <!-- /.row -->
+
+{% extends "blog/admin_dash.html" %}
+{% load staticfiles %}
+{% block bodyblock %}
+
+	<!-- <div class="container"> -->
+		<div class="row">
+		{% for post in page_counter %}
+			<div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img src="{% static post.image %}" style="height:150px" >
+			      <div class="caption">
+			        <h3> {{ post.post_title }} </h3>
+			        <p> {{ post.post_body }} </p>
+			        <p>
+			        	<a href="{% url 'edit_post' slug=post.slug %}" class="btn btn-primary" role="button">Edit</a> 
+			        	<a href="{% url 'delete_post' slug=post.slug %}" class="btn btn-default" role="button">Delete</a>
+			        	
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+		{% endfor %}
+        </div>
+    <!-- </div> -->
+    
+
+    <!-- /.row -->
+
+    	<nav>
+            <ul class="pager">
+              {% if page_counter.has_previous %}
+                <li><a href="?page={{ page_counter.previous_page_number }}">Previous</a></li>
+              {% endif %}
+              <span class="current">
+                  Page {{ page_counter.number }} of {{ page_counter.paginator.num_pages }}
+              </span>
+              {% if page_counter.has_next %}
+                <li><a href="?page={{ page_counter.next_page_number }}">Next</a></li>
+              {% endif %}
+            </ul>
+        </nav>
+
+
+{% endblock %}

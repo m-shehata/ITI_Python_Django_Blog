@@ -1,0 +1,8 @@
+posts
+<ul>
+{% for post in all_posts %}
+	<li> <a href="{{post.get_absolute_url}}">{{ post.post_title }}</a> </li>
+	<li><img src="{{MEDIA_URL}}{{ post.image }}"/> {{ post.image }}</li>
+
+{% endfor %}
+</ul>

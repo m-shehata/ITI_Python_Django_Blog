@@ -1,0 +1,14 @@
+
+{% extends "blog/admin_dash.html" %}
+{% load staticfiles %}
+{% block bodyblock %}
+{% load bootstrap %}
+
+<form method='post'>{% csrf_token %}
+	{{ category_form|bootstrap }}
+	<button type="submit">Save</button>
+</form>
+{% endblock %}
+
+
+

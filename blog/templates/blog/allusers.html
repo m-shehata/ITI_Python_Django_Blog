@@ -1,0 +1,48 @@
+{%  extends 'blog/base.html' %}
+
+{% block content %}
+
+<table border=1>
+<th>UserName</th>
+<th>Email</th>
+<th>Is_superuser</th>
+<th>Is_staff</th>
+<th>Is_active</th>
+<th>last_login</th>
+<th colspan="2">Action</th>
+
+{% for user in all_users %}
+{% if user.is_superuser %}
+<tr style="background-color: #f1f1c1">
+{% else %}
+<tr>
+{%endif%}
+	<td>{{user.username}}</td>
+	<td>{{user.email}}</td>
+	<td>{{user.is_superuser}}</td>
+	<td>{{user.is_staff}}</td>
+	<td>{{user.is_active}}</td>
+	<td>{{user.last_login}}</td>
+	{% if user.is_active is True %}
+	<td><a href="users/{{user.id}}/blocking">Block</a></td>
+	{% else %}
+	<td><a href="users/{{user.id}}/blocking">un-Block</a></td>
+	{% endif %}
+	<td><a href="users/{{user.id}}/delete">Delete</a></td>
+
+	<!--td><a href="student/{{st.id}}/details">details</a></td>
+	<td><a href="student/{{st.id}}/edit">Change</a></td>
+	<td><a href="student/{{st.id}}/delete">Delete</a></td-->
+
+</tr>
+{% endfor %}
+
+</table>
+
+<a href="/blog/register">Add_User</a>
+
+
+<!--button><a href="student/new">New_Student</a></button-->
+<!--a href="student/new">New_Student</a-->
+
+{%  endblock %}

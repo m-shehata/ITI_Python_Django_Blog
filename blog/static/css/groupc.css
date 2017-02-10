@@ -1,0 +1,16 @@
+.post_title{
+  font-size: 20px;
+  font-family: 'Lobster';
+  font-weight: normal;
+  color: #333;
+}
+
+.det_pic{
+  margin-bottom: 30px;
+}
+
+.reply-main{
+  margin-left: 20px 0px;
+  padding: 17px 0px;
+	/*margin: 15px 0px;*/
+}

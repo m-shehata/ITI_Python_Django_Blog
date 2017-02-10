@@ -1,0 +1,36 @@
+
+<html>
+<head>
+</head>
+
+<body>
+posts
+<ul>
+{% for p in context %}
+	<li> <a href=" {% url 'view_blog_post' slug=p.slug %} ">{{ p.post_title }} </a></li>
+	<li><img src="{{MEDIA_URL}}{{ p.image }}"/> {{ p.image }}</li>
+
+{% endfor %}
+</ul>
+ 
+<br>
+<br>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if context.has_previous %}
+            <a href="?page={{ context.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ context.number }} of {{ context.paginator.num_pages }}.
+        </span>
+
+        {% if context.has_next %}
+            <a href="?page={{ context.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+
+</html>

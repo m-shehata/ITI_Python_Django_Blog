@@ -1,0 +1,25 @@
+{% extends "blog/admin_dash.html" %}
+{% load staticfiles %}
+{% block bodyblock %}
+
+		<div class="row">
+		{% for cat in all_categories %}
+			<div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <div class="caption">
+			        <h3> {{ cat.cat_name}} </h3>
+			        <p>Number of posts: {{ cat.posts.count }} </p>
+			        <p>subscribed users: {{ cat.sub_users.count }}</p>
+			        <p>
+			        	<a href="{% url 'edit_category' slug=cat.slug %}" class="btn btn-primary" role="button">Edit</a> 
+			        	<a href="{% url 'delete_category' slug=cat.slug %}" class="btn btn-default" role="button">Delete</a>
+			        	
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+		{% endfor %}
+        </div>
+
+
+{% endblock %}

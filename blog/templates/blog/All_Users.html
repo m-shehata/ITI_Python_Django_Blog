@@ -1,0 +1,46 @@
+ <!-- /.row -->
+{% extends "blog/admin_dash.html" %}
+{% block bodyblock %}
+
+	<table class="table">
+		<th>UserName</th>
+		<th>Email</th>
+		<th>Is_superuser</th>
+		<th>Is_staff</th>
+		<th>Is_active</th>
+		<th>last_login</th>
+		<th colspan="3">Action</th>
+	
+		{% for user in all_users %}
+			{% if user.is_superuser %}
+				<tr class="admincolor">
+			{% else %}
+				<tr>
+			{% endif %}
+					<td>{{user.username}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.is_superuser}}</td>
+					<td>{{user.is_staff}}</td>
+					<td>{{user.is_active}}</td>
+					<td>{{user.last_login}}</td>
+					<td><a href="users/{{user.id}}/delete " onclick="renderconfirm('Are you Sure you want to delete this user? ')" >Delete</a></td>
+				{% if user.is_superuser %}
+					<td></td>
+				{% elif user.is_active %}
+					<td><a href="users/{{user.id}}/blocking">Block</a></td>
+				{% elif user.is_active is False %}
+					<td><a href="users/{{user.id}}/blocking">un-Block</a></td>
+				{% else %}
+					<span></span>
+				{% endif %}
+				{% if user.is_superuser is False %}
+					<td><a href="users/{{user.id}}/promote">Promote</a></td>
+				{% else %}
+					<td></td>
+				{% endif %}
+				</tr>
+		{% endfor %}
+	
+	</table>
+
+{% endblock %}
