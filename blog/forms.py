@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Inappropriate_words
+from django.contrib.auth import authenticate, login, logout, get_user_model
 
 class Comment_Form(forms.ModelForm):
 	class Meta:
@@ -77,3 +78,7 @@ class Inappr_Form(forms.ModelForm):
     class Meta:
         model=Inappropriate_words
         fields=('inappr_wrd',)
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

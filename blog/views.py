@@ -11,6 +11,11 @@ from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
 from .forms import RegistrationForm, RegisterForm
 from .forms import Inappr_Form
+from django.contrib.auth.views import login
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+from django.core.exceptions import ObjectDoesNotExist
 # -------------------- new category --------------------------------------
 def view_all_categories(request):
 	all_cat = Categories.objects.all()
@@ -76,9 +81,10 @@ def index(request):
 
 def view_post(request,slug):
 	post= Posts.objects.get(slug=slug)
+	post.viewed +=1
+	post.save()
 	replyform=Reply_form()
 	if request.method=='POST':
-		print 'inside reply'
 		replyform=Reply_form(request.POST)
 		if replyform.is_valid():
 			reply=replyform.save(commit=False)
@@ -274,3 +280,47 @@ def view_admin_posts(request):
 	except EmptyPage:
 		context =paginator.page(paginator.num_pages)
 	return render(request,'blog/posts_admin.html',{'page_counter':context})
+
+	#------------------- authentication on login -----------------------------
+def my_login_view(request):
+    form = forms.LoginForm()
+    errMsg = ""
+    form = forms.LoginForm(request.POST)
+    print "Form", form
+    if request.method == "POST":
+        if not form.is_valid() or form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(username=username, password=password)
+
+            errMsg = ""
+            active = False
+            is_user = False
+            try:
+                user = User.objects.get(username=username)
+                is_user = True
+                
+            except Exception:
+               
+                errMsg += "<div class =\"alert alert-danger\" role=\"alert\" ><p>"+"User doesn't Exist!"+"</p></div>"
+
+                
+                return render(request, "registration/login.html", {'form': form, 'err':errMsg})
+            else:
+                if not check_password(password, user.password):
+
+                    errMsg += "<div class =\"alert alert-danger\" role=\"alert\" ><p>" + "Check Your Password, and try again." + "</p></div>"
+                    
+                    return render(request, "registration/login.html", {'form': form, 'err':errMsg})
+                else:
+                    active = user.is_active
+                    
+                    if is_user and active:
+                        
+                        login(request, user)
+                       
+                        return HttpResponseRedirect('/blog')
+                    else:
+                        errMsg += "<div class =\"alert alert-danger\" role=\"alert\" ><p>" + "You are blocked, contact the admin." + "</p></div>"
+                        return render(request, "registration/login.html", {'form': form, 'err':errMsg})
+    return render(request, "registration/login.html", {'form': form, 'err':errMsg})    
