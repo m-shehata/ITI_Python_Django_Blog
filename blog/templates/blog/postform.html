@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% block bodyblock %}
 {% load bootstrap %}
-<form method='post'>{% csrf_token %}
+<form enctype="multipart/form-data" method='post'>{% csrf_token %}
 	{{ post_form|bootstrap }}
 	<button type="submit">Save</button>
 </form>

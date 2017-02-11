@@ -57,11 +57,11 @@ def view_cat_posts(request,slug):
 	cat = get_object_or_404(Categories, slug = slug)
 	post = cat.posts.all()
 	context = {'category':cat , 'post':post}
-	return render_to_response ('blog/view_cat_post.html' , context)
+	return render (request,'blog/view_cat_post.html' , context)
 #-----------------------------------------------------------------------------
 #bookmark
 def index(request):
-	all_posts= Posts.objects.all()
+	all_posts= Posts.objects.all().order_by('-publish_date')
 	all_cats= Categories.objects.all()
 	paginator=Paginator(all_posts,5)
 	page =request.GET.get('page')
@@ -129,7 +129,7 @@ def edit_post(request,slug):
 	post=get_object_or_404(Posts,slug=slug)
 	#prepopulated_fields = {'slug':('post_title',)}
 	if request.method == "POST":
-		form=Post_Form(request.POST,instance=post)
+		form=Post_Form(request.POST,request.FILES,instance=post)
 		if form.is_valid():
 			post=form.save(commit=False)
 			#post.auther=request.user
@@ -146,7 +146,7 @@ def edit_post(request,slug):
 def add_post(request):
 	form=Post_Form()
 	if request.method == 'POST':
-		form=Post_Form(request.POST)
+		form=Post_Form(request.POST,request.FILES)
 		if form.is_valid():
 			post=form.save(commit=False)
 			post.author=request.user
