@@ -24,7 +24,7 @@ class Posts(models.Model):
 	image =models.ImageField(upload_to="img/blog", blank=True)
 	publish_date =models.DateTimeField(db_index=True, auto_now_add=True)
 	author = models.ForeignKey('auth.User')
-	category=models.ForeignKey('Categories',related_name='posts')
+	category=models.ForeignKey('Categories',on_delete=models.CASCADE,related_name='posts')
 	viewed = models.IntegerField(default=0)
 
 

@@ -5,6 +5,8 @@
 	<title>Categories</title>
 	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all">
 	<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'css/groupc.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'css/font_css.css' %}" rel="stylesheet" type="text/css" media="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="" />
@@ -18,7 +20,7 @@
 		<div class="container">
 			<div class="header">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo.png" class="img-responsive" alt="" /></a>
+					<a href="{% url 'index' %}"><img style="width: 120px" src="{% static 'images/logo.png' %}" class="img-responsive" alt="" /></a>
 				</div>
 				<div class="clearfix"> </div>
 				</div>
@@ -52,11 +54,27 @@
 	<!-- header -->
 
 	{% block content %}
-	<ul> {{ category.cat_name }}
+	<div class="text-center">
+		<div class="cat_title">
+			{{ category.cat_name }}
+		</div>
+
+	</div>
 	{% for p in post %}
-		<li><a href="{{ p.get_absolute_url }}"> {{ p.post_title }} </a> </li>
+	<div class="details">
+		<div class="container">
+			<div class="det_pic">
+					<img src="{% static p.image %}" class="img-responsive" >
+			</div>
+			<div class="text-center post_title">
+					<a href="{{ p.get_absolute_url }}"> {{ p.post_title }} </a>
+			</div>
+			<div class="det_text">
+					{{p.post_body}}
+			</div>
+		</div>
+	</div>
 		{% endfor %}
-	</ul>
 	{% endblock %}
 </body>
 </html>
