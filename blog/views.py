@@ -199,6 +199,14 @@ def register(request):
 def subscribe(request,slug):
 	cat = Categories.objects.get(slug=slug)
 	cat.sub_users.add(request.user)
+	subject="Open Source Group [C] blog subscribtion"
+	text_message="Hello "+str(request.user)+" you have subscribed successfully in "+str(cat.cat_name)+" welcome aboard"
+	html_message='<font size="20" color="blue">hello</font><br/><br><p>'+text_message+'</p>'
+	from_email="saraelskely@gmail.com"
+	recipient_list=[request.user.email]
+	msg = EmailMultiAlternatives(subject, text_message, from_email, recipient_list)
+	msg.attach_alternative(html_message, "text/html")
+	msg.send()
 	return HttpResponseRedirect('/blog')
 
 def unsubscribe(request,slug):
